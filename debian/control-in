@@ -30,7 +30,7 @@ Build-Depends: debhelper (>= 9),
  libbluetooth-dev [linux-any],
 # --enable-brlapi
  libbrlapi-dev,
-# --enable-virtfs	linux-*
+# --disable-virtfs	linux-*
 # needed for virtfs
  libcap-dev [linux-any],
 # --enable-cap-ng	linux-*
@@ -73,9 +73,7 @@ Build-Depends: debhelper (>= 9),
  libsdl1.2-dev (>> 1.2.1),
 # --enable-seccomp	linux-amd64|linux-i386
  libseccomp-dev (>> 2.1.0) [linux-amd64 linux-i386],
-# --enable-spice	linux-amd64|linux-i386
- libspice-server-dev (>= 0.12.2~) [linux-amd64 linux-i386],
- libspice-protocol-dev (>= 0.12.3~) [linux-amd64 linux-i386],
+# --disable-spice	linux-amd64|linux-i386
 # --enable-libusb	linux-*
  libusb-1.0-0-dev (>= 2:1.0.13~) [linux-any],
 # --enable-usb-redir	linux-*
@@ -88,8 +86,7 @@ Build-Depends: debhelper (>= 9),
 :debian: libvdeplug-dev,
 # needed for sdl
  libx11-dev,
-# --enable-xen	linux-amd64|linux-i386
- libxen-dev [linux-amd64 linux-i386],
+# --disable-xen	linux-amd64|linux-i386
 # XXX need to check minimum linux-headers requiriment
  linux-libc-dev (>= 2.6.34) [linux-any],
 ## always enabled: --enable-uuid
@@ -517,13 +514,10 @@ Package: qemu-kvm
 Multi-Arch: foreign
 Pre-Depends: ${misc:Pre-Depends}
 Depends: ${misc:Depends}, qemu-system-x86 (>= 1.7.0+dfsg-2~)
-Provides: kvm,
-:ubuntu: qemu-kvm-spice
-Conflicts: kvm,
-:ubuntu: qemu-kvm-spice
+Provides: kvm
+Conflicts: kvm
 Breaks: qemu-system-x86 (<< 1.7.0+dfsg-2~)
-Replaces: qemu-system-x86 (<< 1.7.0+dfsg-2~),
-:ubuntu: qemu-kvm-spice
+Replaces: qemu-system-x86 (<< 1.7.0+dfsg-2~)
 Description: QEMU Full virtualization on x86 hardware
  QEMU is a fast processor emulator.  This package provides just a wrapper
  script /usr/bin/kvm which run qemu-system-x86 in kvm mode for backwards
